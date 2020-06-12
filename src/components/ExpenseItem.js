@@ -11,7 +11,7 @@ const ExpenseItem = ({ expense }) => {
                 actions={[<Button type="primary" icon={<EditOutlined />}>Edit</Button>, <Button type="danger" icon={<DeleteFilled />}>Delete</Button>]}
             >
                 <List.Item.Meta
-                    title={<h2>{expense.charge}</h2>}
+                    title={<span>{expense.charge}</span>}
                     description={expense.description}
                 />
             </List.Item>

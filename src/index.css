@@ -5,3 +5,7 @@
 .ant-list-item-meta-title {
     text-transform: capitalize;
 }
+
+.form-label label{
+    min-width: 100px;
+}
