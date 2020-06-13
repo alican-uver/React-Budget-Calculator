@@ -1,18 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
+import { ExpenseContext } from '../expensecontext/ExpenseContext';
 import Item from "./ExpenseItem";
 import { Button, List } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
 
-const ExpenseList = ({ expenses }) => {
+const ExpenseList = () => {
+  const [expense, setExpense] = useContext(ExpenseContext)
   return (
     <>
       <List>
-        {expenses.map((expense) => {
+        {expense.map((expense) => {
           return <Item key={expense.id} expense={expense} />;
         })}
       </List>
       <div className="text-center">
-        {expenses.length > 0 && (
+        {expense.length > 0 && (
           <Button type="danger" shape="round" icon={<DeleteOutlined />}>
             Clear Expenses
           </Button>
