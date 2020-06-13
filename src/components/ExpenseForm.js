@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { ExpenseContext } from '../expensecontext/ExpenseContext';
 import { Form, Input, InputNumber, Button } from 'antd';
 import { SendOutlined } from '@ant-design/icons';
+import { v4 as uuidv4 } from 'uuid';
 
 const ExpenseForm = () => {
     // Context
@@ -26,10 +27,23 @@ const ExpenseForm = () => {
 
     const handleSubmit = e => {
         e.preventDefault();
+        if (chargeValue !== '' &&
+            descriptionValue !== '' &&
+            amountValue > 0
+        ) {
+            const singleExpense = { id: uuidv4(), charge: chargeValue, description: descriptionValue, amount: amountValue }
+            setExpense([...expense, singleExpense])
+            setChargeValue('');
+            setAmountValue(0);
+            setDescriptionValue("");
+        }
+        else {
+            // Display Alert
+        }
     }
 
     return (
-        <Form className="text-center" style={{ marginBottom: '50px' }}>
+        <Form onSubmitCapture={handleSubmit} className="text-center" style={{ marginBottom: '50px' }}>
             <Form.Item
                 className="form-label"
                 label="Charge"
@@ -67,7 +81,6 @@ const ExpenseForm = () => {
                     placeholder="Enter description" />
             </Form.Item>
             <Button
-                onSubmit={handleSubmit}
                 type="primary"
                 htmlType="submit"
                 icon={<SendOutlined />}
