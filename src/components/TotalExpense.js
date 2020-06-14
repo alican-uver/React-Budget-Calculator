@@ -4,7 +4,7 @@ import { ExpenseContext } from '../expensecontext/ExpenseContext';
 
 const TotalExpense = () => {
     const [expense, setExpense] = useContext(ExpenseContext);
-    console.log(expense)
+    
     return (
             <h1 className="text-center" style={{ marginTop: "30px", textTransform: 'uppercase' }}>
             total spending:
