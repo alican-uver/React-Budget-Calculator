@@ -1,26 +1,8 @@
-import React, { useState, createContext } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import React, { useState, createContext, useEffect } from 'react';
 
-const initialExpenses = [
-    {
-        id: uuidv4(),
-        charge: 'rent',
-        amount: 1600,
-        description: 'this section will be explained'
-    },
-    {
-        id: uuidv4(),
-        charge: 'car payment',
-        amount: 4000,
-        description: 'this section will be explained'
-    },
-    {
-        id: uuidv4(),
-        charge: 'credit cart bill',
-        amount: 1200,
-        description: 'this section will be explained'
-    }
-]
+// get local storage
+const initialExpenses = localStorage.getItem('expenses') ? 
+JSON.parse(localStorage.getItem('expenses')) : []
 
 export const ExpenseContext = createContext();
 
@@ -32,6 +14,11 @@ export const ExpenseProvider = props => {
      const [chargeValue, setChargeValue] = useState('');
      const [amountValue, setAmountValue] = useState(0);
      const [descriptionValue, setDescriptionValue] = useState('')
+
+     //add Local Storage
+     useEffect(() => {
+         localStorage.setItem('expenses', JSON.stringify(expense));
+     }, [expense])
 
     const clearItems = () => {
         setExpense([])
