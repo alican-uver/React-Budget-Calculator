@@ -29,11 +29,9 @@ const ExpenseForm = () => {
             descriptionValue !== '' &&
             amountValue > 0) {
             if (edit) {
-                console.log("editing")
                 let tempExpenses = expense.map(item => {
                     return item.id === id ? { ...item, charge: chargeValue, amount: amountValue, description: descriptionValue } : item
                 })
-                console.log(tempExpenses)
                 setExpense(tempExpenses)
                 setEdit(false)
             }
