@@ -49,7 +49,9 @@ const ExpenseForm = () => {
                 label="Charge"
                 rules={[{ required: true, message: 'Please input your charge!' }]}
             >
-                <Input type="text" placeholder="Enter charge"
+                <Input
+                    type="text"
+                    placeholder="Enter charge"
                     name="charge"
                     value={chargeValue}
                     onChange={handleCharge}
@@ -58,7 +60,6 @@ const ExpenseForm = () => {
             <Form.Item
                 className="form-label"
                 label="Amount"
-                name="amount"
                 rules={[{ required: true, message: 'Please input your amount!' }]}
             >
                 <InputNumber
@@ -66,18 +67,19 @@ const ExpenseForm = () => {
                     onChange={handleAmount}
                     type="number"
                     style={{ width: '100%' }}
+                    name="amount"
                     placeholder="Enter amount" />
             </Form.Item>
             <Form.Item
                 className="form-label"
                 label="Description"
-                name="description"
                 rules={[{ required: true, message: 'Please input your description!' }]}
             >
                 <Input
                     value={descriptionValue}
                     onChange={handleDescription}
                     type="text"
+                    name="description"
                     placeholder="Enter description" />
             </Form.Item>
             <Button
