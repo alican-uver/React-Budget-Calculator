@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { ExpenseContext } from '../expensecontext/ExpenseContext';
 import { Form, Input, InputNumber, Button } from 'antd';
 import { SendOutlined } from '@ant-design/icons';
@@ -6,12 +6,10 @@ import { v4 as uuidv4 } from 'uuid';
 
 const ExpenseForm = () => {
     // Context
-    const [expense, setExpense] = useContext(ExpenseContext);
+    const { expense, setExpense, edit, setEdit, chargeValue, amountValue, descriptionValue,
+        setChargeValue, setAmountValue, setDescriptionValue, id
+    } = useContext(ExpenseContext);
 
-    // Functionality
-    const [chargeValue, setChargeValue] = useState('');
-    const [amountValue, setAmountValue] = useState(0);
-    const [descriptionValue, setDescriptionValue] = useState('')
 
     const handleCharge = e => {
         setChargeValue(e.target.value);
@@ -29,10 +27,20 @@ const ExpenseForm = () => {
         e.preventDefault();
         if (chargeValue !== '' &&
             descriptionValue !== '' &&
-            amountValue > 0
-        ) {
-            const singleExpense = { id: uuidv4(), charge: chargeValue, description: descriptionValue, amount: amountValue }
-            setExpense([...expense, singleExpense])
+            amountValue > 0) {
+            if (edit) {
+                console.log("editing")
+                let tempExpenses = expense.map(item => {
+                    return item.id === id ? { ...item, charge: chargeValue, amount: amountValue, description: descriptionValue } : item
+                })
+                console.log(tempExpenses)
+                setExpense(tempExpenses)
+                setEdit(false)
+            }
+            else {
+                const singleExpense = { id: uuidv4(), charge: chargeValue, description: descriptionValue, amount: amountValue }
+                setExpense([...expense, singleExpense])
+            }
             setChargeValue('');
             setAmountValue(0);
             setDescriptionValue("");
@@ -87,7 +95,7 @@ const ExpenseForm = () => {
                 htmlType="submit"
                 icon={<SendOutlined />}
             >
-                Add
+                {edit ? 'Edit' : 'Submit'}
             </Button>
         </Form>
     )

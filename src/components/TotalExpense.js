@@ -3,10 +3,10 @@ import { ExpenseContext } from '../expensecontext/ExpenseContext';
 
 
 const TotalExpense = () => {
-    const [expense, setExpense] = useContext(ExpenseContext);
-    
+    const {expense} = useContext(ExpenseContext);
+
     return (
-            <h1 className="text-center" style={{ marginTop: "30px", textTransform: 'uppercase' }}>
+        <h1 className="text-center" style={{ marginTop: "30px", textTransform: 'uppercase' }}>
             total spending:
             <span style={{ color: 'red' }}>$
                 {
